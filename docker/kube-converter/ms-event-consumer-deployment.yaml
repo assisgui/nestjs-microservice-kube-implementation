@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: ms-event-consumer
+  name: ms-event-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: ms-event-consumer
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/my-network: "true"
+        io.kompose.service: ms-event-consumer
+    spec:
+      containers:
+        - image: ms-event-consumer
+          name: ms-event-consumer
+          resources: {}
+      restartPolicy: Always
+status: {}

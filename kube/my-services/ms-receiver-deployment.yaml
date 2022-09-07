@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms_event_receiver
+  namespace: ms
+  labels:
+    app: ms_event_receiver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms_event_receiver
+  template:
+    spec:
+      metadata:
+        labels:
+          app: ms_event_receiver
+      containers:
+        - image: guilhermedmcassis/ms_event_receiver
+          name: ms-receiver

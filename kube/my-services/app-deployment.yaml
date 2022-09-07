@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms_app
+  namespace: ms
+  labels:
+    app: ms_app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms_app
+  template:
+    spec:
+      metadata:
+        labels:
+          app: ms_app
+      containers:
+        - image: guilhermedmcassis/ms_app
+          name: app
+          ports:
+            - containerPort: 3000

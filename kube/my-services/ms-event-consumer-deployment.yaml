@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms_event_consumer
+  namespace: ms
+  labels:
+    app: ms_event_consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms_event_consumer
+  template:
+    spec:
+      metadata:
+        labels:
+          app: ms_event_consumer
+      containers:
+        - image: guilhermedmcassis/ms_event_consumer
+          name: ms-event-consumer

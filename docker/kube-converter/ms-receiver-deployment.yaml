@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: ms-receiver
+  name: ms-receiver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: ms-receiver
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/my-network: "true"
+        io.kompose.service: ms-receiver
+    spec:
+      containers:
+        - image: ms-receiver
+          name: ms-receiver
+          resources: {}
+      restartPolicy: Always
+status: {}
