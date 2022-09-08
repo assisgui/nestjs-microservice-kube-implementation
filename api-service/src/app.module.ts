@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import {ClientsModule, Transport} from "@nestjs/microservices";
 import {ConfigModule, ConfigService} from "@nestjs/config";
 import {MyLogger} from "./config/myLogger";
+import {EventConsumerService} from "./event-consumer/event-consumer.service";
 
 @Module({
   imports: [
@@ -50,12 +51,14 @@ import {MyLogger} from "./config/myLogger";
         }),
         inject: [ConfigService]
       }
-    ])
+    ]),
   ],
   controllers: [AppController],
   providers: [
     AppService,
-    MyLogger
+    MyLogger,
+    EventConsumerService,
+    ConfigService
   ]
 })
 export class AppModule {}

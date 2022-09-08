@@ -5,7 +5,7 @@ import {ConfigService} from "@nestjs/config";
 import {MyLogger} from "./config/myLogger";
 
 async function bootstrap() {
-  const appContext = await NestFactory.createApplicationContext(AppModule);
+  const appContext = await NestFactory.create(AppModule);
   const configService = appContext.get(ConfigService);
 
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {

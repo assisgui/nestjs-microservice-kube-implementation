@@ -1,12 +1,16 @@
 import {Inject, Injectable} from '@nestjs/common';
 import { ClientProxy } from "@nestjs/microservices";
 import {MyLogger} from "./config/myLogger";
+import {EventConsumerService} from "./event-consumer/event-consumer.service";
+import {ConfigService} from "@nestjs/config";
 
 @Injectable()
 export class AppService {
   constructor(
     @Inject('queue_service') private queueClient: ClientProxy,
     @Inject('event_service') private eventClient: ClientProxy,
+    private configService: ConfigService,
+    private customEventConsumer: EventConsumerService,
     private logger: MyLogger
   ) {
     this.logger.setContext(AppService.name)
@@ -30,7 +34,12 @@ export class AppService {
       })
 
     this.eventClient.emit<any>('simpleEventGet', {
-      text: 'emitting simpleGet'
+      text: 'emitting simpleEventGet'
+    })
+
+    await this.customEventConsumer.broadcastMessage({
+      exchange: this.configService.get('RABBIT_MQ_EXCHANGE_SERVICE'),
+      message: {test: 'message same service'}
     })
   }
 }

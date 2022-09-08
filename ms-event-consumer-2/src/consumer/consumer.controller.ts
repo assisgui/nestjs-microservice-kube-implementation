@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import {Controller} from '@nestjs/common';
 import {Ctx, EventPattern, Payload, RmqContext} from "@nestjs/microservices";
 import {MyLogger} from "../config/myLogger";
 import {EventConsumerService} from "./event-consumer/event-consumer.service";
@@ -16,12 +16,6 @@ export class ConsumerController {
 
   async onApplicationBootstrap() {
     await this.createEventBroadcasterConsumer()
-  }
-
-  @EventPattern('simpleEventGet')
-  simpleEventGet(@Payload() data: any, @Ctx() context: RmqContext) {
-    this.logger.debug('listen 1')
-    this.logger.log(`Pattern: ${context.getPattern()}`, data);
   }
 
   @EventPattern('simpleEventGet')
