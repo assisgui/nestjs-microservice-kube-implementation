@@ -1,11 +1,11 @@
-import {Inject, Injectable} from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from "@nestjs/microservices";
-import {MyLogger} from "./config/myLogger";
-import {EventConsumerService} from "./event-consumer/event-consumer.service";
-import {ConfigService} from "@nestjs/config";
+import { ConfigService } from "@nestjs/config";
+import { MyLogger } from "../config/myLogger";
+import { EventConsumerService } from "./event-consumer/event-consumer.service";
 
 @Injectable()
-export class AppService {
+export class MsServiceService {
   constructor(
     @Inject('queue_service') private queueClient: ClientProxy,
     @Inject('event_service') private eventClient: ClientProxy,
@@ -13,7 +13,7 @@ export class AppService {
     private customEventConsumer: EventConsumerService,
     private logger: MyLogger
   ) {
-    this.logger.setContext(AppService.name)
+    this.logger.setContext(MsServiceService.name)
   }
 
   /** Hook to connect on microservice when app start */

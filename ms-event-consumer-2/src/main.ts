@@ -15,7 +15,7 @@ async function bootstrap() {
       urls: [{
         protocol: configService.get('RABBIT_MQ_PROTOCOL'),
         hostname: configService.get('RABBIT_MQ_HOSTNAME'),
-        port: configService.get('RABBIT_MQ_PORT'),
+        port: +configService.get('RABBIT_MQ_PORT'),
         username: configService.get('RABBIT_MQ_USERNAME'),
         password: configService.get('RABBIT_MQ_PASSWORD')
       }],
