@@ -1,18 +1,13 @@
-import {CanActivate, ExecutionContext, Injectable, SetMetadata, UnauthorizedException} from '@nestjs/common';
+import {CanActivate, ExecutionContext, Injectable, Logger, SetMetadata, UnauthorizedException} from '@nestjs/common';
 import { Observable } from 'rxjs';
 import {Reflector} from "@nestjs/core";
 import { from } from 'shiro-perms'
 import { isNil } from '@nestjs/common/utils/shared.utils';
-import {MyLogger} from "./myLogger";
 
 @Injectable()
 export class ShiroPermsGuard implements CanActivate {
-  constructor(
-    private reflector: Reflector,
-    private myLogger: MyLogger
-  ) {
-    this.myLogger.setContext(ShiroPermsGuard.name)
-  }
+  private readonly logger = new Logger(ShiroPermsGuard.name);
+  constructor(private reflector: Reflector) {}
 
   canActivate(
     context: ExecutionContext,
@@ -33,8 +28,8 @@ export class ShiroPermsGuard implements CanActivate {
       return permission
     })
 
-    this.myLogger.debug(`permissions on route: ${permissions}`)
-    this.myLogger.debug(`user permissions: ${user.permission}`)
+    this.logger.debug(`permissions on route: ${permissions}`)
+    this.logger.debug(`user permissions: ${user.permission}`)
 
     if (!perms.checkAny(permissions)) {
       throw new UnauthorizedException()

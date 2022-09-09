@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable, Logger, LoggerService} from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
 import {DeleteResult, Repository} from "typeorm";
 import { User } from "../entities/user";
@@ -12,6 +12,7 @@ import {Permissions} from "../entities/permissions";
 
 @Injectable()
 export class UserService {
+  private readonly logger = new Logger(UserService.name);
   constructor(
     @InjectRepository(Permissions) private permissionsRepository: Repository<Permissions>,
     @InjectRepository(Roles) private rolesRepository: Repository<Roles>,
@@ -55,12 +56,14 @@ export class UserService {
   }
 
   findAll(): Promise<User[]> {
+    this.logger.debug('finding all users')
     return this.usersRepository.find({
       relations: ['role', 'role.permission']
     });
   }
 
   findOne(id: number): Promise<User> {
+    this.logger.debug(`finding user by id ${id}`)
     return this.usersRepository.findOne({
       where: { id },
       relations: ['role', 'role.permission']

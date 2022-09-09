@@ -3,7 +3,6 @@ import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {User} from "../entities/user";
-import { MyLogger } from 'src/config/myLogger';
 import {Roles} from "../entities/roles";
 import {Permissions} from "../entities/permissions";
 
@@ -12,9 +11,6 @@ import {Permissions} from "../entities/permissions";
     TypeOrmModule.forFeature([User, Roles, Permissions])
   ],
   controllers: [UserController],
-  providers: [
-    UserService,
-    MyLogger
-  ]
+  providers: [UserService]
 })
 export class UserModule {}

@@ -4,7 +4,6 @@ import { MsServiceService } from './ms-service.service';
 import {ClientsModule, Transport} from "@nestjs/microservices";
 import {ConfigModule, ConfigService} from "@nestjs/config";
 import {EventConsumerService} from "./event-consumer/event-consumer.service";
-import { MyLogger } from '../config/myLogger';
 
 @Module({
   imports: [
@@ -57,8 +56,7 @@ import { MyLogger } from '../config/myLogger';
   providers: [
     MsServiceService,
     EventConsumerService,
-    ConfigService,
-    MyLogger
+    ConfigService
   ]
 })
 export class MsModuleModule {}

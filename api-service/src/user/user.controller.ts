@@ -1,9 +1,19 @@
-import {Body, Controller, Delete, Get, Param, Patch, Post, Request, UseGuards} from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Logger,
+  Param,
+  Patch,
+  Post,
+  Request,
+  UseGuards
+} from '@nestjs/common';
 import { UserService } from "./user.service";
 import {ApiBearerAuth, ApiBody, ApiParam, ApiTags} from "@nestjs/swagger";
 import {AuthDTO, StoreUserDTO, UpdateUserDTO} from "./user-dto";
 import {JwtGuard, Public} from "../config/jwt/jwt.guard";
-import {MyLogger} from "../config/myLogger";
 import {Permissions, ShiroPermsGuard} from "../config/shiro-perms.guard";
 
 @ApiTags('User')
@@ -11,12 +21,10 @@ import {Permissions, ShiroPermsGuard} from "../config/shiro-perms.guard";
 @UseGuards(JwtGuard, ShiroPermsGuard)
 @ApiBearerAuth()
 export class UserController {
+  private readonly logger = new Logger(UserController.name);
   constructor(
     private readonly userService: UserService,
-    private logger: MyLogger
-  ) {
-    this.logger.setContext(UserController.name)
-  }
+  ) {}
 
   @Public()
   @Post('/auth')

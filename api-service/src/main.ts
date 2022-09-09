@@ -1,18 +1,17 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import {ConfigService} from "@nestjs/config";
-import {BadRequestException, Logger, ValidationError, ValidationPipe} from "@nestjs/common";
+import {BadRequestException, ValidationError, ValidationPipe} from "@nestjs/common";
 import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
-import {MyLogger} from "./config/myLogger";
 import {HttpFilter} from "./config/http.filter";
-
-const logger = new Logger('Main');
+import {Logger} from "nestjs-pino";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: true,
-    logger: new MyLogger(),
+    bufferLogs: true
   });
+  app.useLogger(app.get(Logger));
   const configService = app.get(ConfigService);
 
   app.useGlobalFilters(new HttpFilter());
@@ -28,8 +27,8 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('API Gateway')
-    .setDescription('API Gateway')
+    .setTitle('API')
+    .setDescription('API')
     .addBearerAuth()
     .setVersion('1.0')
     .build();
@@ -41,5 +40,5 @@ async function bootstrap() {
 }
 
 bootstrap()
-  .then(() => logger.log('Application is running'))
-  .catch((err) => logger.error(err));
+  .then(() => console.log('Application is running'))
+  .catch((err) => console.error(err));
