@@ -4,6 +4,8 @@ import { UserModule } from './user/user.module';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {User} from "./entities/user";
 import {ConfigModule} from "./config/config.module";
+import {Roles} from "./entities/roles";
+import {Permissions} from "./entities/permissions";
 
 @Module({
   imports: [
@@ -11,7 +13,7 @@ import {ConfigModule} from "./config/config.module";
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: ':memory:',
-      entities: [User],
+      entities: [User, Roles, Permissions],
       synchronize: true,
     }),
     MsModuleModule,

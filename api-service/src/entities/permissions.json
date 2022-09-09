@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "permission": "users:*"
+  },
+  {
+    "id": 2,
+    "permission": "users:view,edit,create:2"
+  },
+  {
+    "id": 3,
+    "permission": "users:view"
+  }
+]

@@ -1,15 +1,16 @@
 import {Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
-import {Roles} from "./roles";
+import { User } from "./user";
+import { Permissions } from "./permissions";
 
 @Entity()
-export class User {
+export class Roles {
   @PrimaryGeneratedColumn()
   id: number
 
   @Column()
   name: string
 
-  @ManyToOne(() => Roles)
+  @ManyToOne(() => Permissions)
   @JoinColumn()
-  role: Roles | number
+  permission: Permissions | number
 }

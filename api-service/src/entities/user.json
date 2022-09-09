@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Tony",
+    "role": 1
+  },
+  {
+    "id": 2,
+    "name": "Thor",
+    "role": 1
+  },
+  {
+    "id": 3,
+    "name": "Steve",
+    "role": 2
+  },
+  {
+    "id": 4,
+    "name": "Bruce",
+    "role": 2
+  },
+  {
+    "id": 5,
+    "name": "Papper",
+    "role": 3
+  },
+  {
+    "id": 6,
+    "name": "Nick",
+    "role": 3
+  }
+]

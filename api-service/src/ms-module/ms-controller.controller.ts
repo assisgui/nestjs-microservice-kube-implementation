@@ -1,13 +1,10 @@
-import {Controller, Get, UseGuards, Request} from '@nestjs/common';
-import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
+import {Controller, Get, Request} from '@nestjs/common';
+import {ApiTags} from "@nestjs/swagger";
 import {MsServiceService} from "./ms-service.service";
-import {JwtGuard} from "../config/jwt/jwt.guard";
 import {MyLogger} from "../config/myLogger";
 
 @ApiTags('MS Controller')
 @Controller('ms-controller')
-@UseGuards(JwtGuard)
-@ApiBearerAuth()
 export class MsControllerController {
   constructor(
     private readonly msService: MsServiceService,

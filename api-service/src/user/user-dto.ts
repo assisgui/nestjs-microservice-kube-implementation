@@ -8,8 +8,8 @@ export class StoreUserDTO implements Omit<User, 'id'> {
   name: string
 
   @ApiProperty()
-  @IsString()
-  permissions: string
+  @IsNumber()
+  role: number
 }
 
 export class UpdateUserDTO extends PartialType(StoreUserDTO) {}
